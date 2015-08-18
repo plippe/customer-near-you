@@ -15,4 +15,8 @@ object SteamBuild extends Build {
 
   def newProject(id: String, settings: Seq[Setting[_]]): Project =
     Project(id, file(id)).settings(commonSettings ++ settings: _*)
+
+  lazy val customer = newProject(
+    "customer",
+    Seq(libraryDependencies ++= Dependencies.customer))
 }
