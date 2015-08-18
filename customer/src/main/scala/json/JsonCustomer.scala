@@ -15,6 +15,16 @@ case class JsonCustomer(
 
 object JsonCustomer {
   /**
+   * Converts a json customer to a normal customer
+   * @param json The json customer to convert
+   * @return The customer
+   */
+  def toCustomer(json: JsonCustomer): Customer = {
+    val coordinate = Coordinate(json.latitude.toDouble, json.longitude.toDouble)
+    Customer(json.user_id, json.name, coordinate)
+  }
+
+  /**
    * Obtain the json customer found in a json string
    * @param jsonStr The json string to read
    * @return The json customer found

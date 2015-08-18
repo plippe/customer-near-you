@@ -61,6 +61,18 @@ class TestJsonCustomer extends FunSpec {
         assert(customers.size === 1)
       }
     }
+
+    describe("toCustomer") {
+      it("should convert json customer into customer") {
+        val json = JsonCustomer(1, "2", "3", "4")
+        val customers = JsonCustomer.toCustomer(json)
+
+        assert(customers.id === 1)
+        assert(customers.name === "2")
+        assert(customers.coordinate.latitude === 3d)
+        assert(customers.coordinate.longitude === 4d)
+      }
+    }
   }
 
 }
