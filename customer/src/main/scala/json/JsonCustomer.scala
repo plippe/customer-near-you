@@ -1,7 +1,9 @@
 package com.github.plippe.steam.intercom.customer.json
 
+import java.io.File
 import org.json4s._
 import org.json4s.native.JsonMethods._
+import scala.io.Source
 
 import com.github.plippe.steam.intercom.customer.{ Customer, Coordinate }
 
@@ -22,5 +24,17 @@ object JsonCustomer {
 
     val json = parse(jsonStr)
     json.extractOpt[JsonCustomer]
+  }
+
+  /**
+   * Obtain customers found in a json file
+   * @param file The json file to read
+   * @return The customers found
+   */
+  def fromFile(file: File): Traversable[JsonCustomer] = {
+    Source.fromFile(file)
+      .getLines()
+      .flatMap(JsonCustomer.fromString)
+      .toTraversable
   }
 }
